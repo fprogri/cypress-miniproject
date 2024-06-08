@@ -14,7 +14,7 @@ class NotebooksPage {
   };
 
   visit() {
-    cy.intercept("/cdn-cgi/rum?").as("loads");
+    header.elements.load();
     const url = "notebooks";
     cy.visit(url);
     cy.url().should("contain", url);
