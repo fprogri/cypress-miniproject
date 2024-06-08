@@ -18,8 +18,8 @@ class NotebooksPage {
     const url = "notebooks";
     cy.visit(url);
     cy.url().should("contain", url);
-    cy.wait("@loads");
-    cy.wait("@loads");
+    cy.wait("@load");
+    cy.wait("@load");
   }
 
   pageSize(value) {
