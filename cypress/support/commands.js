@@ -24,11 +24,15 @@ import userData from "../fixtures/userData.json";
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
 Cypress.Commands.add("login", (object) => {
-  cy.session(object.name, () => {
-    cy.visit("login");
-    loginPage.login(object);
-    homePage.isLogedIn();
-  });
+  cy.session(
+    object.email,
+    () => {
+      cy.visit("login");
+      loginPage.login(object);
+      homePage.isLogedIn();
+    },
+    { cacheAcrossSpecs: true }
+  );
 });
 //
 //

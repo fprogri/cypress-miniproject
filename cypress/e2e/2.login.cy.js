@@ -6,8 +6,8 @@ const homePage = new HomePage();
 const loginPage = new LoginPage();
 const header = new Header();
 
-describe("", () => {
-  it("does this", () => {
+describe("login", () => {
+  it("logs in", () => {
     cy.visit("");
     header.loginLink();
     loginPage.login(userData);

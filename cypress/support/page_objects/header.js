@@ -6,10 +6,27 @@ class Header {
     closeButton: () => cy.get(".close"),
     wishlistQty: () => cy.get(".wishlist-qty"),
     cartQty: () => cy.get(".cart-qty"),
-    load: () => cy.intercept("/cdn-cgi/rum?").as("load"),
+    loadApi: () => cy.intercept("/cdn-cgi/rum?"),
     cartTab: () => cy.get("#flyout-cart"),
     goToCartButton: () => cy.get(".buttons > .button-1"),
+    loadAnimation: () => cy.get(".ajax-loading-block-window"),
   };
+  pageLoad() {
+    // this.elements.loadAnimation().should("be.visible");
+    // this.elements.loadAnimation().should("not.be.visible");
+    this.elements.loadAnimation().then(($el) => {
+      if ($el.is(":visible")) {
+        // Element is visible, wait for it to become not visible
+        this.elements.loadAnimation().should("not.be.visible");
+      }
+    });
+  }
+
+  waitLoad() {
+    this.elements.loadApi().as("load");
+    cy.wait("@load");
+    // cy.wait("@load");
+  }
 
   loginLink() {
     this.elements.loginLink().click();
@@ -29,9 +46,7 @@ class Header {
 
   goToCart() {
     this.elements.cartTab().invoke("show");
-    this.elements.load();
-    cy.wait("@load");
-    cy.wait("@load");
+    this.waitLoad();
     this.elements.goToCartButton().should("be.visible").click();
     cy.url().should("contain", "cart");
   }

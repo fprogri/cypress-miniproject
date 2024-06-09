@@ -14,12 +14,10 @@ class NotebooksPage {
   };
 
   visit() {
-    header.elements.load();
     const url = "notebooks";
     cy.visit(url);
     cy.url().should("contain", url);
-    cy.wait("@load");
-    cy.wait("@load");
+    header.waitLoad();
   }
 
   pageSize(value) {

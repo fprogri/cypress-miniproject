@@ -1,3 +1,6 @@
+import Header from "./header";
+const header = new Header();
+
 class LoginPage {
   elements = {
     registerButton: () => cy.get(".new-wrapper > .buttons > .button-1"),
@@ -7,8 +10,10 @@ class LoginPage {
   };
 
   registerButtonClick() {
+    header.waitLoad();
     this.elements.registerButton().should("be.visible").click();
   }
+
   login(object) {
     this.elements.emailInput().type(object.email);
     this.elements.pwInput().type(object.pw);
