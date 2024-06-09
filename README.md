@@ -1,6 +1,6 @@
 # cypress-miniproject
 
-This repository contains automated tests written using Cypress for testing demo.nopcommerce.com
+This repository contains automated tests written using Cypress for testing demo.nopcommerce.com. The project uses the Page Object Model design pattern to organize test code and improve maintainability.
 
 ## Table of Contents
 
