@@ -11,6 +11,7 @@ class NotebooksPage {
     wishlistButton: () => cy.get('[title="Add to wishlist"]'),
     productTitle: () => cy.get(".product-title > a"),
     addToCartButton: () => cy.get(".product-box-add-to-cart-button"),
+    grid: () => cy.get(".item-grid"),
   };
 
   visit() {

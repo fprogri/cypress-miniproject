@@ -1,14 +1,7 @@
 import HomePage from "../support/page_objects/homePage";
 import LoginPage from "../support/page_objects/loginPage";
-import RegisterPage from "../support/page_objects/registerPage";
-import RegisterResultPage from "../support/page_objects/registerResultPage";
-import Header from "../support/page_objects/header";
 const homePage = new HomePage();
 const loginPage = new LoginPage();
-const registerPage = new RegisterPage();
-const registrationResultPage = new RegisterResultPage();
-const header = new Header();
-import userData from "../fixtures/userData.json";
 
 // ***********************************************
 // This example commands.js shows you how to
