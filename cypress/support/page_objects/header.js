@@ -12,11 +12,8 @@ class Header {
     loadAnimation: () => cy.get(".ajax-loading-block-window"),
   };
   pageLoad() {
-    // this.elements.loadAnimation().should("be.visible");
-    // this.elements.loadAnimation().should("not.be.visible");
     this.elements.loadAnimation().then(($el) => {
       if ($el.is(":visible")) {
-        // Element is visible, wait for it to become not visible
         this.elements.loadAnimation().should("not.be.visible");
       }
     });
@@ -25,7 +22,6 @@ class Header {
   waitLoad() {
     this.elements.loadApi().as("load");
     cy.wait("@load");
-    // cy.wait("@load");
   }
 
   loginLink() {
