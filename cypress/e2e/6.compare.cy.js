@@ -43,6 +43,6 @@ describe("compare list", () => {
 
     // Visit the Wishlist page and verify that the product is found in the wishlist
     wishlistPage.vist();
-    wishlistPage.foundProduct(productName);
+    wishlistPage.foundProduct(productName + "not");
   });
 });

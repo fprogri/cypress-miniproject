@@ -11,7 +11,7 @@ module.exports = defineConfig({
     watchForFileChanges: false,
     viewportWidth: 1400,
     viewportHeight: 800,
-    video: false,
+    video: true,
     // experimentalRunAllSpecs: true,
     setupNodeEvents(on, config) {
       require("cypress-mochawesome-reporter/plugin")(on);

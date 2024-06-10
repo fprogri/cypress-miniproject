@@ -2,6 +2,14 @@
 
 This repository contains automated tests written using Cypress for testing demo.nopcommerce.com. The project uses the Page Object Model design pattern to organize test code and improve maintainability.
 
+This project has:
+
+- retryability,
+- html reporter using mochawasome,
+- cli mocha report,
+- screenshot on faliure
+- video recording,
+
 ## Table of Contents
 
 - [Getting Started](#getting-started)
@@ -44,3 +52,5 @@ The test suite is organized into the following directories:
 - **user data**: '/cypress/fixtures/userData.json'.
 - **cypress custom comands**: '/cypress/support/commands.js'.
 - **screenshots**: '/cypress/screenshots'.
+- **videos**: '/cypress/videos'.
+- **report html**: '/cypress/reports'.
