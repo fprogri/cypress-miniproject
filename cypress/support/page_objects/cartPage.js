@@ -19,6 +19,7 @@ class CartPage {
     emptyMessage: () => cy.get(".no-data"),
   };
 
+  // check if the cart page is empty
   isEmpty() {
     this.elements.buttons.remove().should("not.exist");
     this.elements
@@ -27,65 +28,76 @@ class CartPage {
       .and("contain", "Your Shopping Cart is empty!");
   }
 
+  // Check if the continue shopping and estimate shipping buttons are visible
   assertButtons() {
     this.elements.buttons.continueShopping().should("be.visible");
     this.elements.buttons.estimateShipping().should("be.visible");
   }
 
+  // Verify that the total price is correct
   assertTotal() {
     this.elements.productSubtotal().then(($subtotals) => {
-      // Convert the text values to numbers and sum them
       const subtotalSum = Cypress._.sum(
+        // sums the prices of products and asigns them to a variable
         Cypress._.map($subtotals, (subtotal) => {
-          // Remove currency symbols and commas, then convert to a number
+          //itterates through the found elements
           return parseFloat(subtotal.innerText.replace(/[\$,]/g, ""));
+          // trims the inner text of each element and converts it to number
         })
       );
 
-      // Step 2: Get the value of the .product-total element
+      // Get the total value
       this.elements.productTotal().then(($total) => {
         // Remove currency symbols and commas, then convert to a number
         const total = parseFloat($total.text().replace(/[\$,]/g, ""));
-
-        // Step 3: Assert that the sum of the subtotals is equal to the total
         expect(subtotalSum).to.equal(total);
       });
     });
+
+    // Verify the color of the product total element
     this.elements
       .productTotal()
       .should("have.css", "color", "rgb(74, 178, 241)");
   }
 
+  // Visit the cart page and makes sure that it is done loading
   visit() {
     cy.visit("cart");
     header.waitLoad();
     header.pageLoad();
   }
 
+  // Estimate the shipping cost
   estimateShipping(country = 1, state = 1, zip = 1) {
+    // opens the estimate shipping popup, fills the form and submits it
     this.elements.buttons.estimateShipping().click();
     this.elements.estimateShippingPopup().should("be.visible");
     this.elements.countrySelect().select(country);
     this.elements.stateSelect().select(state);
     this.elements.zipInput().type(zip);
     this.elements.buttons.apply().click();
+
+    // checks that the correct request is sent
     cy.intercept(
       `cart/estimateshipping?CountryId=${country}&StateProvinceId=${state}&ZipPostalCode=${zip}&City=`
     ).as("estimatedshipping");
     cy.wait("@estimatedshipping");
+
     this.elements.buttons.closePopup().click();
   }
 
+  // Remove an item from the cart
   removeItem(nr) {
     cy.intercept(
       "/shoppingcart/checkoutattributechange/%7BisEditable%7D?isEditable=True"
     ).as("pageload");
     this.elements.buttons.remove().then(($elements) => {
-      const initialCount = $elements.length;
-      cy.wrap($elements).eq(nr).click();
-      cy.wait("@pageload");
-      this.elements.buttons.remove().should("have.length", initialCount - 1);
+      const initialCount = $elements.length; // Get the initial number of remove buttons
+      cy.wrap($elements).eq(nr).click(); // Click the remove button for the specified item
+      cy.wait("@pageload"); // Wait for the page load request to complete
+      this.elements.buttons.remove().should("have.length", initialCount - 1); // Ensure the number of remove buttons decreased by one
     });
   }
 }
+
 export default CartPage;

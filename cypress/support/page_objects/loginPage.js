@@ -9,11 +9,13 @@ class LoginPage {
     loginButton: () => cy.get("form > .buttons > .button-1"),
   };
 
+  // Click the register button
   registerButtonClick() {
     header.waitLoad();
     this.elements.registerButton().should("be.visible").click();
   }
 
+  // Log in using provided credentials
   login(object) {
     this.elements.emailInput().type(object.email);
     this.elements.pwInput().type(object.pw);

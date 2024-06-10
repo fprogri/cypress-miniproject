@@ -3,6 +3,7 @@ class RegisterResultPage {
     resultMessage: () => cy.get(".result"),
   };
 
+  // asserts that the registration was sucesful
   registrationSuccessCheck() {
     this.elements
       .resultMessage()

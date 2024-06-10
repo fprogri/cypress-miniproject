@@ -11,6 +11,7 @@ module.exports = defineConfig({
     viewportWidth: 1400,
     viewportHeight: 800,
     video: false,
+    reporter: "spec",
     // experimentalRunAllSpecs: true,
     setupNodeEvents(on, config) {
       // implement node event listeners here

@@ -6,10 +6,10 @@ const cartPage = new CartPage();
 
 describe("shopping cart", () => {
   it("shopping cart", () => {
-    cy.login(userData);
+    cy.login(userData); // Custom command to log in using user data
     cy.visit("");
-    header.goToCart();
-    cartPage.assertButtons();
-    cartPage.assertTotal();
+    header.goToCart(); // Navigate to the Cart page
+    cartPage.assertButtons(); // Verify that the necessary buttons are visible on the Cart page
+    cartPage.assertTotal(); // Verify the total price calculation on the Cart page and the total element has specified color
   });
 });

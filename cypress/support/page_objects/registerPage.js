@@ -15,9 +15,12 @@ class RegisterPage {
     registerButton: () => cy.get("#register-button"),
   };
 
+  // Perform a new registration using the provided object
   newRegistration(object) {
+    // aserts that the register page is loaded
     this.elements.url().should("contain", "register");
     this.elements.title().should("contain", "Register");
+    // fills the form
     this.elements.maleRadioButton().click();
     this.elements.firstNameInput().type(object.name);
     this.elements.lastNameInput().type(object.surname);
@@ -28,6 +31,7 @@ class RegisterPage {
     this.elements.companyInput().type(object.company);
     this.elements.passwordInput().type(object.pw);
     this.elements.confirmPasswordInput().type(object.pw);
+    // submits the form
     this.elements.registerButton().click();
   }
 }

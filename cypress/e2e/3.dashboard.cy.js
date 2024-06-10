@@ -10,22 +10,29 @@ const productPage = new ProductPage();
 
 describe("dashboard", () => {
   it("dashboard", () => {
-    cy.login(userData);
+    cy.login(userData); // Custom command to log in using user data
     cy.visit("");
-    homePage.goToNotebooksPage();
-    notebooksPage.pageSize("9");
-    notebooksPage.itemsOnPage(6);
-    notebooksPage.check16gb();
-    notebooksPage.itemsOnPage(1);
-    notebooksPage.check16gb();
-    notebooksPage.itemsOnPage(6);
+    homePage.goToNotebooksPage(); // Navigate to the Notebooks page
+    notebooksPage.pageSize("9"); // Change the number of items displayed per page to 9
+    notebooksPage.itemsOnPage(6); // Verify there are 6 items displayed on the page
+    notebooksPage.check16gb(); // Filter by 16GB option
+    notebooksPage.itemsOnPage(1); // Verify there is 1 item displayed after filtering
+    notebooksPage.check16gb(); // Reapply the 16GB filter (likely meant to toggle the filter)
+    notebooksPage.itemsOnPage(6); // Verify there are 6 items displayed on the page again
+
+    // Add the 2nd and 3rd items to the wishlist
     notebooksPage.addToWishlist(1);
     notebooksPage.addToWishlist(2);
-    notebooksPage.openDetails(3);
-    productPage.addToCart();
-    notebooksPage.visit();
+
+    notebooksPage.openDetails(3); // Open the details page for the 4th item
+    productPage.addToCart(); // Add the product to the cart from the details page
+    notebooksPage.visit(); // Visit the Notebooks page again
+
+    // Add the 5th and 6th items to the cart
     notebooksPage.addToCart(4);
     notebooksPage.addToCart(5);
+
+    // Verify the wishlist and cart quantities in the header
     header.wishlistQtyIs(2);
     header.cartQtyIs(3);
   });
